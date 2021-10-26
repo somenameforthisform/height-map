@@ -6,11 +6,30 @@ import { resizeRendererToDisplaySize, addCamera, addScene, buildSurfaceMesh } fr
  * Метод для рисования на карте высот
  */
 const drawOnEditor = (mouseEvent) => {
+  let x, y;
+
+if(mouseEvent instanceof TouchEvent){
+  x = mouseEvent.touches[0].clientX;
+  y = mouseEvent.touches[0].clientY;
+} else {
+  x = mouseEvent.clientX;
+  y = mouseEvent.clientY;
+}
+
   if (isMouseDown) {
     editorCtx.fillStyle = '#10101005'
     editorCtx.beginPath();
-    editorCtx.arc(mouseEvent.clientX, mouseEvent.clientY, penRadius, 0, 2 * Math.PI);
+    editorCtx.arc(x, y, penRadius, 0, 2 * Math.PI);
     editorCtx.closePath();
+    var grd=editorCtx.createRadialGradient(x,
+       y, 
+       penRadius / 4,
+       x,
+       y,
+       penRadius);
+    grd.addColorStop(0,"#10101010");
+    grd.addColorStop(1,"#10101000");
+    editorCtx.fillStyle=grd;
     editorCtx.fill();
     redrawSurface(axisLength);
   }
