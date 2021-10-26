@@ -8,7 +8,7 @@ import { resizeRendererToDisplaySize, addCamera, addScene, buildSurfaceMesh } fr
 const drawOnEditor = (mouseEvent) => {
   let x, y;
 
-if(mouseEvent instanceof TouchEvent){
+if(mouseEvent.touches){
   x = mouseEvent.touches[0].clientX;
   y = mouseEvent.touches[0].clientY;
 } else {
@@ -21,7 +21,7 @@ if(mouseEvent instanceof TouchEvent){
     editorCtx.beginPath();
     editorCtx.arc(x, y, penRadius, 0, 2 * Math.PI);
     editorCtx.closePath();
-    var grd=editorCtx.createRadialGradient(x,
+    const grd=editorCtx.createRadialGradient(x,
        y, 
        penRadius / 4,
        x,
