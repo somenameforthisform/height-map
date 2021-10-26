@@ -226,4 +226,8 @@ editor.addEventListener('mouseup', () => isMouseDown = false);
 editor.addEventListener('mousemove', event => drawOnEditor(event));
 editor.addEventListener('wheel', event => { penRadius += event.deltaY * -0.01; console.log(penRadius) });
 
+editor.addEventListener('touchstart', () => isMouseDown = true);
+editor.addEventListener('touchend', () => isMouseDown = false);
+editor.addEventListener('touchmove', event => drawOnEditor(event));
+
 
